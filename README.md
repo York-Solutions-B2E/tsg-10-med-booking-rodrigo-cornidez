@@ -69,64 +69,63 @@ docker-compose down
 
 ```mermaid
 erDiagram
-    BASE {
-        createdAt LocalDateTime
-        updatedAt LocalDateTime
-    }
-
-    AUTH {
-        userId int
-        oktaId string
-        role string
-    }
-
-    PATIENT {
-        patientId int
-        firstName string
-        lastName string
-        dob LocalDate
-    }
-    PATIENT ||--|| AUTH : "has one"
-
-    SPECIALTY {
-        specialtyId int
-        name string
-    }
-
-    DOCTOR {
-        doctorId int
-        firstName string
-        lastName string
-        employmentStatus string
-    }
-    DOCTOR ||--|| SPECIALTY : "has one"
-
     APPOINTMENT {
-        appointmentId int
-        date LocalDate
-        visitType string
-        status string
+        Long appointmentId
+        Patient patient
+        AppointmentSlot slot
+        Doctor doctor
+        LocalDate date
+        VisitType visitType
+        AppointmentStatus status
     }
-    APPOINTMENT ||--|| PATIENT : "belongs to"
-    APPOINTMENT ||--|| DOCTOR : "assigned to"
-    APPOINTMENT ||--|| APPOINTMENTSLOT : "uses"
-
     APPOINTMENTSLOT {
-        slotId int
-        date LocalDate
-        startTime LocalTime
-        endTime LocalTime
-        status string
+        Long slotId
+        Doctor doctor
+        LocalDate date
+        LocalTime startTime
+        LocalTime endTime
+        SlotStatus status
     }
-    APPOINTMENTSLOT ||--|| DOCTOR : "available for"
-
+    AUTH {
+        Long userId
+        String oktaId
+        Role role
+    }
+    DOCTOR {
+        Long doctorId
+        String firstName
+        String lastName
+        Specialty specialty
+        EmploymentStatus employmentStatus
+    }
     DOCTORAVAILABILITY {
-        availabilityId int
-        dayOfWeek string
-        startTime LocalTime
-        endTime LocalTime
+        Long availabilityId
+        Doctor doctor
+        DayOfWeek dayOfWeek
+        LocalTime startTime
+        LocalTime endTime
     }
-    DOCTORAVAILABILITY ||--|| DOCTOR : "available for"
+    PATIENT {
+        Long patientId
+        Auth auth
+        String firstName
+        String lastName
+        LocalDate dob
+    }
+    SPECIALTY {
+        Long specialtyId
+        String name
+    }
 
+    APPOINTMENT }|--|| PATIENT : "belongs to"
+    APPOINTMENT }|--|| DOCTOR : "belongs to"
+    APPOINTMENT }|--o| APPOINTMENTSLOT : "uses"
+
+    APPOINTMENTSLOT }|--|| DOCTOR : "belongs to"
+
+    DOCTOR }|--|| SPECIALTY : "has"
+    DOCTORAVAILABILITY }|--|| DOCTOR : "belongs to"
+
+    PATIENT ||--|| AUTH : "has one"
 
 ```
