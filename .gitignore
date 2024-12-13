@@ -1,0 +1,67 @@
+# General Ignore
+.DS_Store
+Thumbs.db
+*.log
+*.tmp
+node_modules/
+target/
+dist/
+build/
+.vscode/
+.idea/
+*.iml
+*.swp
+.env
+
+# React Project
+react/node_modules/
+react/dist/
+react/build/
+react/.env
+react/.parcel-cache/
+react/npm-debug.log*
+react/yarn-debug.log*
+react/yarn-error.log*
+react/.turbo/
+react/.eslintcache
+react/.next/
+react/out/
+react/coverage/
+
+# Spring Boot Project
+springboot/target/
+springboot/build/
+springboot/.gradle/
+springboot/.idea/
+springboot/*.iml
+springboot/*.log
+springboot/.classpath
+springboot/.project
+springboot/.settings/
+springboot/.vscode/
+springboot/bin/
+springboot/mvnw
+springboot/mvnw.cmd
+springboot/.mvn/
+springboot/logs/
+springboot/tmp/
+springboot/h2*.db
+
+#PostgreSQL Data
+postgres-data/*
+!postgres-data/.gitkeep
+
+# Maven and Gradle Caches (optional)
+.mvn/
+.gradle/
+!springboot/src/**/.keep
+
+# Ignore IntelliJ/IDEA specific files
+**/*.ipr
+**/*.iws
+**/.idea/
+
+# Ignore npm and yarn debug files
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
